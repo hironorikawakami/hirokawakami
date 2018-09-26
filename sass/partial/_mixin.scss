@@ -1,0 +1,101 @@
+//
+// FONT SMOOTHING
+// --------------------------------------------------
+@mixin font-smoothing{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+//
+// RADIUS
+// --------------------------------------------------
+@mixin border_radius($br_value) {
+  @each $prefix in $set_prefix {
+      #{$prefix}border-radius: $br_value;
+  }
+}
+
+//
+// BOX
+// --------------------------------------------------
+@mixin box-flex($value){
+  @each $prefix in $set_prefix {
+    #{$prefix}box-flex: $value;
+  }
+}
+@mixin box-ordinal-group($value){
+  @each $prefix in $set_prefix {
+    #{$prefix}box-ordinal-group: $value;
+  }
+}
+@mixin display-box($value){
+  @each $prefix in $set_prefix {
+    display: #{$prefix}$value;
+  }
+}
+@mixin display($value){
+  @each $prefix in $set_prefix {
+    display: #{$prefix}$value;
+  }
+}
+@mixin box-align($value){
+  @each $prefix in $set_prefix {
+    #{$prefix}box-align: $value;
+  }
+}
+@mixin align-items($value){
+  @each $prefix in $set_prefix {
+    #{$prefix}align-items: $value;
+  }
+}
+@mixin flex-basis($value){
+  @each $prefix in $set_prefix {
+    #{$prefix}flex-basis: $value;
+  }
+}
+@mixin flex-wrap($value){
+  @each $prefix in $set_prefix {
+    #{$prefix}flex-wrap: $value;
+  }
+}
+
+//
+// MEDIA QUERIES
+// --------------------------------------------------
+
+// ## Variables
+$mq-sp     : null !default;
+$mq-tablet : null !default;
+
+$default-mq-sp-max-width     : 480px !default;
+$default-mq-tablet-max-width : 768px !default;
+
+// ## Wrapper
+@mixin mq {
+    @include mq-tablet  { @content; }
+    @include mq-sp      { @content; }
+}
+
+// ## For Smartphones
+@mixin mq-sp(
+    $max: $default-mq-sp-max-width
+) {
+    $_tmp: $mq-sp;
+    $mq-sp: true;
+    @media only screen and (max-width:#{$max}) {
+        @content;
+    }
+    $mq-sp: $_tmp;
+}
+
+// ## For Tablets
+@mixin mq-tablet(
+    $max: $default-mq-tablet-max-width
+) {
+    $_tmp: $mq-tablet;
+    $mq-sp: true;
+    @media only screen and (max-width:#{$max}) {
+        @content;
+    }
+    $mq-tablet: $_tmp;
+}
